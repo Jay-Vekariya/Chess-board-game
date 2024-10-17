@@ -4,10 +4,15 @@ import { createStore } from "redux";
 const initialState = {
   squares: Array(64)
     .fill()
-    .map((_, index) => ({
-      color: Math.floor(index / 8) % 2 === 0 ? "white" : "black",
-      clickedcolor: null,
-    })),
+    .map((_, index) => {
+      const row = Math.floor(index / 8);
+      const col = index % 8;
+      const isWhite = (row + col) % 2 === 0;
+      return {
+        color: isWhite ? "white" : "black",
+        clickedcolor: null,
+      };
+    }),
 };
 
 const reducer = (state = initialState, action) => {
